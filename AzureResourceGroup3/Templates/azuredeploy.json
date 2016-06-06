@@ -4,8 +4,44 @@
     "parameters": {
     },
     "variables": {
+        "vnet1Prefix": "10.0.0.0/16",
+        "vnet1Subnet1Name": "Subnet-1",
+        "vnet1Subnet1Prefix": "10.0.0.0/24",
+        "vnet1Subnet2Name": "Subnet-2",
+        "vnet1Subnet2Prefix": "10.0.1.0/24"
     },
     "resources": [
+        {
+            "name": "vnet1",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-06-15",
+            "dependsOn": [ ],
+            "tags": {
+                "displayName": "vnet1"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[variables('vnet1Prefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[variables('vnet1Subnet1Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('vnet1Subnet1Prefix')]"
+                        }
+                    },
+                    {
+                        "name": "[variables('vnet1Subnet2Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('vnet1Subnet2Prefix')]"
+                        }
+                    }
+                ]
+            }
+        }
     ],
     "outputs": {
     }
